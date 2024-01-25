@@ -5,7 +5,7 @@ import { currentUserRouter } from './routes/current-user';
 import { signinRouter } from './routes/signin';
 import { signoutRouter } from './routes/singout';
 import { signupRouter } from './routes/signup';
-import { errorHandler } from './middlewares/error-hanlder';
+import { errorHandler } from './middlewares/error-handler';
 
 const app = express();
 app.use(json());
