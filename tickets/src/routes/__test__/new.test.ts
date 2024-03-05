@@ -36,6 +36,14 @@ it('returns an error if an invalid price is provided', async () => {
 it('creates a ticket with valid inputs', async () => {
   //add in a check to make sure a ticket was saved
   let tickets = await Ticket.find({});
+  expect(tickets.length).toEqual(0);
 
-  await request(app).post('/api/tickets').send({ title: 'fdsfafa', price: 200 }).expect(201);
+  const title = 'asdf';
+
+  await request(app).post('/api/tickets').set('Cookie', global.signin()).send({ title, price: 200 }).expect(201);
+
+  tickets = await Ticket.find({});
+  expect(tickets.length).toEqual(1);
+  expect(tickets[0].price).toEqual(200);
+  expect(tickets[0].title).toEqual(title);
 });
