@@ -5,6 +5,7 @@ import { errorHandler, NotFoundError, currentUser } from '@sahurtarotickets/comm
 import cookieSession from 'cookie-session';
 import { createTicketRouter } from './routes/new';
 import { ShowTicketRouter } from './routes/show';
+import { indexTicketRouter } from './routes';
 
 const app = express();
 app.set('trust proxy', true);
@@ -19,6 +20,7 @@ app.use(currentUser);
 
 app.use(createTicketRouter);
 app.use(ShowTicketRouter);
+app.use(indexTicketRouter);
 
 app.all('*', async (req, res) => {
   throw new NotFoundError();
