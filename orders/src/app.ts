@@ -3,10 +3,11 @@ import 'express-async-errors';
 import { json } from 'body-parser';
 import { errorHandler, NotFoundError, currentUser } from '@sahurtarotickets/common';
 import cookieSession from 'cookie-session';
-// import { createTicketRouter } from './routes/new';
-// import { ShowTicketRouter } from './routes/show';
-// import { indexTicketRouter } from './routes';
-// import { updateTicketRouter } from './routes/update';
+
+import { showOrderRouter } from '../routes/show';
+import { newOrderRouter } from '../routes/new';
+import { indexOrderRouter } from '../routes';
+import { deleteOrderRouter } from '../routes/delete';
 
 const app = express();
 app.set('trust proxy', true);
@@ -19,10 +20,10 @@ app.use(
 );
 app.use(currentUser);
 
-// app.use(createTicketRouter);
-// app.use(ShowTicketRouter);
-// app.use(indexTicketRouter);
-// app.use(updateTicketRouter);
+app.use(newOrderRouter);
+app.use(showOrderRouter);
+app.use(indexOrderRouter);
+app.use(deleteOrderRouter);
 
 app.all('*', async (req, res) => {
   throw new NotFoundError();
